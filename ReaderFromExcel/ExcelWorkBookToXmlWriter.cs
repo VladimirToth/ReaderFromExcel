@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ReaderFromExcel
 {
-    class ExcelWorkBookToXmlWriter//:IExcelWorkBookWriter
+    class ExcelWorkBookToXmlWriter : IExcelWorkBookWriter
     {
+        public void WriteExcelWorkBook(ExcelWorkbook workBook, bool rewrite)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
