@@ -10,5 +10,6 @@ namespace ReaderFromExcel
     {
         public string Name { get; set; }
         public List<ExcelWorkSheet> Sheets { get; set; }
+
     }
 }

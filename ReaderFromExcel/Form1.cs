@@ -30,6 +30,9 @@ namespace ReaderFromExcel
                 {
                     excelName.Text = fileDialog.FileName;
                 }
+
+                ExcelWorkBookReader reader = new ExcelWorkBookReader();
+                reader.ReadExcelWorkBook(excelName.Text, reader.NamesOfSheets(excelName.Text));
             }
         }
 
