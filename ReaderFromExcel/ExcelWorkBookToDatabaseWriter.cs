@@ -9,6 +9,7 @@ namespace ReaderFromExcel
 {
     class ExcelWorkBookToDatabaseWriter : IExcelWorkBookWriter
     {
+        enum NamesOfColumn { OldCode, NewCode, Good, Mj, Quantity, OldPrice, NewPrice, Ean };
 
         //public string CreateTable()
         //{
@@ -17,6 +18,8 @@ namespace ReaderFromExcel
 
         public void WriteExcelWorkBook(ExcelWorkbook workBook, bool rewrite)
         {
+            
+
             Column col = new Column();
             string connectionString = "Data Source=ServerName; Initial Catalog=DatabaseName;User ID=username;Password=password";
 
