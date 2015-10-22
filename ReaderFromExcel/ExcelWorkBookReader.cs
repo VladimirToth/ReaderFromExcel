@@ -27,7 +27,7 @@ namespace ReaderFromExcel
                     DataTable dt = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
 
                     excelSheets = dt.Rows.Cast<DataRow>()
-                        .Where(i => i["TABLE_NAME"].ToString().EndsWith("$") /*|| i => i["TABLE_NAME"].ToString().EndsWith("$'")*/)
+                        .Where(i => i["TABLE_NAME"].ToString().EndsWith("$") || i["TABLE_NAME"].ToString().EndsWith("$'"))
                         .Select(i => i["TABLE_NAME"].ToString()).ToList();
 
                     return excelSheets;
