@@ -30,6 +30,12 @@ namespace ReaderFromExcel
                         .Where(i => i["TABLE_NAME"].ToString().EndsWith("$") || i["TABLE_NAME"].ToString().EndsWith("$'"))
                         .Select(i => i["TABLE_NAME"].ToString()).ToList();
 
+                    //List<string> columnNames = new List<string>();
+                    //DataTable schemaCols = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, null);
+                    //columnNames = schemaCols.Rows.Cast<DataColumn>()
+                    //    .Select(i => i["COLUMN_NAME"]).ToString().ToList();
+                  
+
                     return excelSheets;
                 }
                 catch (Exception)
@@ -45,33 +51,13 @@ namespace ReaderFromExcel
 
             UploadDocument workBook = new UploadDocument();
 
-            List<UploadDocument> list = new List<UploadDocument>();
-
-            using (OleDbConnection connection = new OleDbConnection(con))
-            {
-                ExcelWorkbook work = new ExcelWorkbook();
-
-                connection.Open();
-
-                if (sheets != null)
-                {
-                    foreach (var item in sheets)
-                    {
-                        //work.Sheets = ;
-                        new ExcelWorkSheet
-                        {
-                            name = item.ToString()
-                        };
-                    }
-                }
-            }
-
-
             using (OleDbConnection connection = new OleDbConnection(con))
             {
                 connection.Open();
 
-                if (sheets != null)
+                List<UploadDocument> list = new List<UploadDocument>();
+
+                if (sheets.Count == 1)
                 {
                     foreach (var item in sheets)
                     {
@@ -94,9 +80,68 @@ namespace ReaderFromExcel
                             }
                     }
                 }
+
+                else if (sheets.Count>1)
+                {
+                    ExcelWorkbook work = new ExcelWorkbook();
+                    DataTable dt = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+
+                    foreach (var item in sheets)
+                    {
+                        work.Sheets.Add(ReadSheet(filename, item));
+                    }
+
+                   
+                   
+                }
             }
      
             return workBook;
+        }
+
+
+        public ExcelWorkSheet ReadSheet(string filename, string name)
+        {
+             string con = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filename + ";Extended Properties='Excel 12.0;HDR=No;'";
+
+             ExcelWorkSheet sheet = new ExcelWorkSheet();
+             int r = 0;
+             using (OleDbConnection connection = new OleDbConnection(con))
+             {
+                  OleDbCommand command = new OleDbCommand("select * from [" + name + "]", connection);
+                  using (OleDbDataReader dr = command.ExecuteReader())
+                  {
+                      while (dr.Read() && dr.IsDBNull(0) == false)
+                      {
+                          if (r == 0)
+                          {
+                              for (int i = 0; dr.IsDBNull(i) == false; i++)
+                              {
+                                  new Column
+                                  {
+                                      Name = dr.GetValue(i).ToString(),
+                                      Order = i,
+                                      Type = dr.GetFieldType(i).FullName
+                                  };
+                              }
+                              r += 1;
+                          }
+                          else
+                          {       
+                              Row row = new Row();
+                              row.Data = new Dictionary<int, Data>();
+
+                              for (int i = 0; dr.IsDBNull(i) == false; i++)
+                              {
+                                  row.Data.Add(i, new Data()
+                                  {
+                                      Value = dr.GetValue(i).ToString()
+                                  });
+                              }
+                          }
+                      }
+                  }
+             }
         }
 
         public UploadDocument2 ReadExcelWorkBook2(string filename, List<string> sheets)

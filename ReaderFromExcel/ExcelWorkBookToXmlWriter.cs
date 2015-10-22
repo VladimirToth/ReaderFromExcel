@@ -10,9 +10,9 @@ namespace ReaderFromExcel
 {
     class ExcelWorkBookToXmlWriter:IExcelWorkBookWriter
     {
-        public void WriteExcelWorkBook(ExcelWorkbook workBook, bool rewrite)
+        public void WriteExcelWorkBook(UploadDocument workBook, bool rewrite)
         {
-            XmlSerializer x = new XmlSerializer(typeof(ExcelWorkbook));
+            XmlSerializer x = new XmlSerializer(typeof(UploadDocument));
             using (FileStream file = new FileStream("cesta.xml", FileMode.OpenOrCreate))
             using (TextWriter tw = new StreamWriter(file))
             {
