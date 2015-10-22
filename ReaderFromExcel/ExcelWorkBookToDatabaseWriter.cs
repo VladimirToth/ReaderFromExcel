@@ -16,51 +16,51 @@ namespace ReaderFromExcel
 
         //}
 
-        public void WriteExcelWorkBook(ExcelWorkbook workBook, bool rewrite)
+        public void WriteExcelWorkBook(UploadDocument workBook, bool rewrite)
         {
             
 
             Column col = new Column();
-            string connectionString = "Data Source=ServerName; Initial Catalog=DatabaseName;User ID=username;Password=password";
+            //string connectionString = "Data Source=ServerName; Initial Catalog=DatabaseName;User ID=username;Password=password";
 
-            string sqlCreate = "Create Table" + workBook.Name + "(";
-            foreach (var column in col)
-            {
-                sqlCreate += column.Name;
+            //string sqlCreate = "Create Table" + workBook.Name + "(";
+            //foreach (var column in col)
+            //{
+            //    sqlCreate += column.Name;
 
-                if (column.Type == "int")
-                {
-                    sqlCreate += " int ";
-                }
+            //    if (column.Type == "int")
+            //    {
+            //        sqlCreate += " int ";
+            //    }
 
-                else if (column.Type == "long")
-                {
-                    sqlCreate += " bigint ";
-                }
+            //    else if (column.Type == "long")
+            //    {
+            //        sqlCreate += " bigint ";
+            //    }
 
-                else if (column.Type == "double")
-                {
-                    sqlCreate += " decimal(6,2) ";
-                }
+            //    else if (column.Type == "double")
+            //    {
+            //        sqlCreate += " decimal(6,2) ";
+            //    }
 
-                else if (column.Type == "string")
-                {
-                    sqlCreate += " varchar(MAX) ";
-                }
+            //    else if (column.Type == "string")
+            //    {
+            //        sqlCreate += " varchar(MAX) ";
+            //    }
 
-                sqlCreate += ",";
-            }
+            //    sqlCreate += ",";
+            //}
 
-            sqlCreate += ");";
+            //sqlCreate += ");";
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(sqlCreate, conn);
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                cmd.Clone();
-            }
+            //using (SqlConnection conn = new SqlConnection(connectionString))
+            //{
+            //    conn.Open();
+            //    SqlCommand cmd = new SqlCommand(sqlCreate, conn);
+            //    cmd.ExecuteNonQuery();
+            //    cmd.Dispose();
+            //    cmd.Clone();
+            //}
         }
 
   

@@ -30,6 +30,12 @@ namespace ReaderFromExcel
                 {
                     excelName.Text = fileDialog.FileName;
                 }
+
+                ExcelWorkBookReader reader = new ExcelWorkBookReader();
+                //reader.NamesOfSheet(excelName.Text);
+                List<string> sheets = reader.NamesOfSheets(excelName.Text);
+
+                reader.ReadExcelWorkBook(excelName.Text, sheets);
             }
         }
 
@@ -77,11 +83,14 @@ namespace ReaderFromExcel
                 savefiledialog.Filter = "All Files(*.xml)|*.xml";
                 if (savefiledialog.ShowDialog() == DialogResult.OK)
                 {
-                    Stream filestream = savefiledialog.OpenFile();
-                    StreamWriter streamwriter = new StreamWriter(filestream);
-                    streamwriter.Write("<?xml version='1.0'?>" +
-                        Environment.NewLine + xmlView.Text);
-                    streamwriter.Close();
+                    //Stream filestream = savefiledialog.OpenFile();
+                    //StreamWriter streamwriter = new StreamWriter(filestream);
+                    //streamwriter.Write("<?xml version='1.0'?>");// +
+                    //    //Environment.NewLine + xmlView.Text);
+                    //streamwriter.Close();
+
+                    ExcelWorkBookToXmlWriter write = new ExcelWorkBookToXmlWriter();
+                    //write.WriteExcelWorkBook();
                 }
             }
         }

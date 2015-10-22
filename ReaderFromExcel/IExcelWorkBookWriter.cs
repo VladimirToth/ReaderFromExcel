@@ -8,6 +8,6 @@ namespace ReaderFromExcel
 {
     interface IExcelWorkBookWriter
     {
-        void WriteExcelWorkBook(ExcelWorkbook workBook, bool rewrite);
+        void WriteExcelWorkBook(UploadDocument workBook, bool rewrite);
     }
 }

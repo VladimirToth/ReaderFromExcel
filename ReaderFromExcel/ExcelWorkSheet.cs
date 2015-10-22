@@ -8,6 +8,7 @@ namespace ReaderFromExcel
 {
     class ExcelWorkSheet
     {
+        public string name { get; set; }
         public Dictionary<int, Column> Columns { get; set; }
         public List<Row> Rows { get; set; }
 
