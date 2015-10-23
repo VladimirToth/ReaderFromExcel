@@ -173,10 +173,11 @@ namespace ReaderFromExcel
                     using (OleDbDataReader dr = command.ExecuteReader())
                         while (dr.Read() && dr.IsDBNull(0) == false)
                         {
-
+                            
                             list.Add(
                                 new AbRow
                                 {
+                                  
                                     cisloBalicka = Convert.ToInt32(dr[0]),
                                     typ = dr[1].ToString(),
                                     upL1 = Convert.ToInt32(dr[2]),
@@ -220,7 +221,6 @@ namespace ReaderFromExcel
                     using (OleDbDataReader dr = command.ExecuteReader())
                         while (dr.Read() && dr.IsDBNull(0) == false)
                         {
-
                             list.Add(
                                 new CodeRow
                                 {
