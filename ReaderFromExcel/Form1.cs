@@ -34,8 +34,9 @@ namespace ReaderFromExcel
                 ExcelWorkBookReader reader = new ExcelWorkBookReader();
                 List<string> sheets = reader.NamesOfSheets(excelName.Text);
 
-                //reader.ReadExcelWorkBook2(excelName.Text, sheets);
-                reader.ReadExcelWorkBook(excelName.Text, sheets);
+                //reader.ReadEbook(excelName.Text, sheets);
+                reader.ReadAbRow(excelName.Text, sheets);
+                //reader.ReadExcelWorkBook(excelName.Text, sheets);
             }
         }
 

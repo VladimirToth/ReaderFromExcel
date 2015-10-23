@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ReaderFromExcel
 {
-    class UploadDocument2
+    class AbRow
     {
         public int cisloBalicka { get; set; }
         public string typ { get; set; }

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ReaderFromExcel
 {
-    interface IExcelWorkBookWriter
+    class CodeRow
     {
-        void WriteExcelWorkBook(EOrderRow workBook, bool rewrite);
+        public int kod { get; set; }
+        public string mesto { get; set; }
     }
 }

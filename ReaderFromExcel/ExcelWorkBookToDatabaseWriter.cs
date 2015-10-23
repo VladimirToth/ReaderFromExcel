@@ -16,9 +16,8 @@ namespace ReaderFromExcel
 
         //}
 
-        public void WriteExcelWorkBook(UploadDocument workBook, bool rewrite)
+        public void WriteExcelWorkBook(EOrderRow workBook, bool rewrite)
         {
-            
 
             Column col = new Column();
             //string connectionString = "Data Source=ServerName; Initial Catalog=DatabaseName;User ID=username;Password=password";
