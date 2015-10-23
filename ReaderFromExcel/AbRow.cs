@@ -25,5 +25,6 @@ namespace ReaderFromExcel
         public DateTime platnostOd { get; set; }
         public DateTime platnostDo { get; set; }
         public string nazovBalicka { get; set; }
+        public List<CodeRow> kody { get; set; }
     }
 }

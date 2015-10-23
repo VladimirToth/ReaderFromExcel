@@ -69,7 +69,7 @@ namespace ReaderFromExcel
                                     good = dr["Tovar"].ToString(),
                                     mj = dr["MJ"].ToString(),
                                     quantity = Convert.ToInt32(dr["Balenie (kusov v kartóne)"]),
-                                    newPrice = Convert.ToDouble(dr["SN ČS DDU"]),
+                                    newPrice = Convert.ToDouble(dr["SN ČS DDU 10.2.2015 EUR/KS"]),
                                     UPL = Convert.ToInt32(dr["UPL"]),
                                     EAN = Convert.ToInt64(dr["EAN"])
                                 });
@@ -85,7 +85,6 @@ namespace ReaderFromExcel
 
             return workBook;
         }
-
 
 
         //public ExcelWorkbook ReadExcelWorkBook(string filename, List<string> sheets)
@@ -174,7 +173,7 @@ namespace ReaderFromExcel
                     using (OleDbDataReader dr = command.ExecuteReader())
                         while (dr.Read() && dr.IsDBNull(0) == false)
                         {
-                            
+
                             list.Add(
                                 new AbRow
                                 {
@@ -195,6 +194,7 @@ namespace ReaderFromExcel
                                     platnostOd = Convert.ToDateTime(dr[14]),
                                     platnostDo = Convert.ToDateTime(dr[15]),
                                     nazovBalicka = dr[16].ToString()
+                                    
                                 });
                         }
                 }
@@ -202,8 +202,38 @@ namespace ReaderFromExcel
             return sheet1;
         }
 
+        public CodeRow ReadCodeRow(string filename, List<string> sheets)
+        {
+            string con = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filename + ";Extended Properties='Excel 12.0;HDR=Yes;'";
 
+            CodeRow codeRow = new CodeRow();
+
+            List<CodeRow> list = new List<CodeRow>();
+
+            using (OleDbConnection connection = new OleDbConnection(con))
+            {
+                connection.Open();
+
+                if (sheets != null)
+                {
+                    OleDbCommand command = new OleDbCommand("select * from [" + sheets + "]", connection);
+                    using (OleDbDataReader dr = command.ExecuteReader())
+                        while (dr.Read() && dr.IsDBNull(0) == false)
+                        {
+
+                            list.Add(
+                                new CodeRow
+                                {
+
+
+                                });
+                        }
+                }
+            }
+            return codeRow;
+        }
     }
+    
 }
 
 
