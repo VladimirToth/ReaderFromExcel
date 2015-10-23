@@ -12,6 +12,6 @@ namespace ReaderFromExcel
         public string Type { get; set; }
         public int Order { get; set; }
 
-
+        
     }
 }
